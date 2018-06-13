@@ -4,11 +4,11 @@ import ChatHeader from './ChatHeader'
 import MessageList from './MessageList'
 import MessageForm from './MessageForm';
 
-class Chat extends Component{
-    constructor(){
+class Chat extends Component {
+    constructor() {
         super();
-        this.state={
-            messages:[
+        this.state = {
+            messages: [
                 {
                     id: 1,
                     userName: 'kwood',
@@ -30,17 +30,25 @@ class Chat extends Component{
             userName: this.props.user.userName,
             body
         })
-        this.setState({messages})
+        this.setState({ messages })
     }
 
-    render(){
-        return(
-            <div className="Chat">
+    render() {
+        return (
+            <div className="Chat" style={styles.Chat}>
                 <ChatHeader />
-                <MessageList messages={this.state.messages}/>
-                <MessageForm addMessage={this.addMessage}/>
+                <MessageList messages={this.state.messages} />
+                <MessageForm addMessage={this.addMessage} />
             </div>
         )
+    }
+}
+
+const styles = {
+    Chat: {
+        flex: "1",
+        display: "flex",
+        flexDirection: "column"
     }
 }
 
