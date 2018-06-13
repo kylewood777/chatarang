@@ -27,6 +27,7 @@ class MessageForm extends Component {
           placeholder="Type a message..."
           value={this.state.body}
           onChange={this.handleChange}
+          autoFocus
         />
         <button type="submit">Send</button>
       </form>
