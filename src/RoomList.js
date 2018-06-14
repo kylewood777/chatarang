@@ -1,22 +1,50 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 
-const RoomList = () => {
-  return (
-    <nav
-      className={`RoomList ${css(styles.nav)}`}
-    >
-      <h2 className={css(styles.h2)}>Rooms</h2>
-      <ul className={css(styles.list)}>
-        <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)}>general</a>
-        </li>
-        <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)}>random</a>
-        </li>
-      </ul>
-    </nav>
-  )
+import RoomLink from './RoomLink'
+
+class RoomList extends Component {
+  state = {
+    rooms: {
+      general: {
+        name: 'general',
+        description: 'Chat about anything',
+      },
+
+      random: {
+        name: 'random',
+        description: 'Cat GIFs',
+      },
+
+      food: {
+        name: 'food',
+        description: 'Twammiches and whatnot',
+      },
+    }
+  }
+
+  render() {
+    return (
+      <nav
+        className={`RoomList ${css(styles.nav)}`}
+      >
+        <h2 className={css(styles.h2)}>Rooms</h2>
+        <ul className={css(styles.list)}>
+          {
+            Object.keys(this.state.rooms).map(
+              roomName => (
+                <RoomLink
+                  key={roomName}
+                  room={this.state.rooms[roomName]}
+                  loadRoom={this.props.loadRoom}
+                />
+              )
+            )
+          }
+        </ul>
+      </nav>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -32,24 +60,6 @@ const styles = StyleSheet.create({
     listStyle: 'none',
     marginLeft: 0,
     paddingLeft: 0,
-  },
-
-  item: {
-    marginBottom: '0.5rem',
-  },
-
-  link: {
-    display: 'block',
-    color: 'whitesmoke',
-    textDecoration: 'none',
-
-    '::before': {
-      content: '"# "',
-    },
-
-    ':hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    }
   },
 })
 
