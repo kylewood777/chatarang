@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import './App.css'
+import { auth } from './base'
 import SignIn from './SignIn'
 import Main from './Main'
 
@@ -9,10 +10,10 @@ class App extends Component {
     user: {},
   }
 
-  componentDidMount(){
-    const user=JSON.parse(localStorage.getItem('user'))
-    if(user){
-      this.setState({user})
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+      this.setState({ user })
     }
   }
 
@@ -20,12 +21,19 @@ class App extends Component {
     return this.state.user.uid
   }
 
-  handleAuth = (user) => {
+  handleAuth = (oauthUser) => {
+    const user = {
+      uid: oauthUser.uid,
+      displayName: oauthUser.displayName,
+      email: oauthUser.email,
+      photoUrl: oauthUser.photoURL,
+    }
     this.setState({ user })
     localStorage.setItem('user', JSON.stringify(user))
   }
 
   signOut = () => {
+    auth.signOut()
     this.setState({ user: {} })
     localStorage.removeItem('user')
   }
