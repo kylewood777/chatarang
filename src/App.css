@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 body {
-    margin: 0;
-    font-family: Raleway, sans-serif;
-  }
-  
+  margin: 0;
+  font-family: Raleway, sans-serif;
+}
+
+.RoomList a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
