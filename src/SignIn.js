@@ -80,7 +80,7 @@ class SignIn extends Component {
               className={css(styles.button)}
               onClick={this.authenticateFacebook}
             >
-              <i className={`fab fa-facebook ${css(styles.brandIcon)}`}></i>
+              <i className={`fab fa-facebook-f ${css(styles.brandIcon)}`}></i>
               Sign in with Facebook
             </button>
           </form>
