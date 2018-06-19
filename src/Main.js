@@ -39,7 +39,19 @@ class Main extends Component {
   }
 
   loadRoom = (room) => {
-    this.setState({ room })
+    if(room==='new')return null
+
+    if(room){
+      this.setState({ room })
+    }else{
+      this.loadValidRoom()
+    }
+    
+  }
+
+  loadValidRoom = () => {
+    const roomName = Object.keys(this.state.rooms)[0]
+    this.props.history.push(`/rooms/${roomName}`)
   }
 
   render() {
