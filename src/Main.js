@@ -27,6 +27,7 @@ class Main extends Component {
     if (prevProps.match.params.roomName !== this.props.match.params.roomName) {
       this.loadRoom({
         name: this.props.match.params.roomName,
+        description: this.state.rooms[this.props.match.params.roomName].description
       })
     }
   }
