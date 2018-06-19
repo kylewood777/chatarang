@@ -4,28 +4,8 @@ import { Route, Switch, Link } from 'react-router-dom'
 
 import RoomLink from './RoomLink'
 import RoomForm from './RoomForm'
-import base from './base'
 
 class RoomList extends Component {
-  state = {
-    rooms: {},
-  }
-
-  componentDidMount() {
-    base.syncState(
-      'rooms',
-      {
-        context: this,
-        state: 'rooms',
-      }
-    )
-  }
-
-  addRoom = (room) => {
-    const rooms = {...this.state.rooms}
-    rooms[room.name] = room
-    this.setState({ rooms })
-  }
 
   render() {
     return (
@@ -34,7 +14,7 @@ class RoomList extends Component {
           path="/rooms/new"
           render={navProps => (
             <RoomForm
-              addRoom={this.addRoom}
+              addRoom={this.props.addRoom}
               {...navProps}
             />
           )}
@@ -56,11 +36,11 @@ class RoomList extends Component {
                 </div>
                 <ul className={css(styles.list)}>
                   {
-                    Object.keys(this.state.rooms).map(
+                    Object.keys(this.props.rooms).map(
                       roomName => (
                         <RoomLink
                           key={roomName}
-                          room={this.state.rooms[roomName]}
+                          room={this.props.rooms[roomName]}
                         />
                       )
                     )
