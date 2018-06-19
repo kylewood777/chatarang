@@ -7,16 +7,19 @@ import SignIn from './SignIn'
 import Main from './Main'
 
 class App extends Component {
+  constructor(){
+    super()
+    const user = JSON.parse(localStorage.getItem('user'))||{}
+    this.state={
+      user
+    }
+  }
+
   state = {
     user: {},
   }
 
   componentDidMount() {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (user) {
-      this.setState({ user })
-    }
-
     auth.onAuthStateChanged(
       user => {
         if (user) {
@@ -60,7 +63,7 @@ class App extends Component {
         <Switch>
           <Route
             path="/sign-in"
-            render={navProps => (
+            render={() => (
               this.signedIn()
                 ? <Redirect to="/rooms/general" />
                 : <SignIn />
@@ -79,7 +82,7 @@ class App extends Component {
             )}
           />
           <Route
-            render={navProps => (
+            render={()=> (
               this.signedIn()
                 ? <Redirect to="/rooms/general" />
                 : <Redirect to="/sign-in" />
