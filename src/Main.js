@@ -54,7 +54,7 @@ class Main extends Component {
   loadRoom = (roomName) => {
     if (roomName === 'new') return null
 
-    const room = this.state.rooms[roomName]
+    const room = this.filteredRooms().find(room => room.name===roomName)
 
     if (room) {
       this.setState({ room })
