@@ -11,6 +11,22 @@ class RoomList extends Component {
     rooms: {},
   }
 
+  filterRooms = () => {
+    const rooms = { ...this.state.rooms }
+    const usersRooms = {}
+
+    for (let j = 0; j < rooms.length; j++) {
+      if (rooms[j].public==false) {
+        for (let i = 0; i < rooms[j].members.length; i++) {
+          if (rooms[j].members[i].label === this.props.user.uid) {
+            usersRooms.push(rooms[j]);
+          }
+        }
+      }
+    }
+    return usersRooms;
+  }
+
   componentDidMount() {
     base.syncState(
       'rooms',
@@ -22,7 +38,7 @@ class RoomList extends Component {
   }
 
   addRoom = (room) => {
-    const rooms = {...this.state.rooms}
+    const rooms = { ...this.state.rooms }
     rooms[room.name] = room
     this.setState({ rooms })
   }
@@ -57,7 +73,7 @@ class RoomList extends Component {
                 </div>
                 <ul className={css(styles.list)}>
                   {
-                    Object.keys(this.state.rooms).map(
+                    Object.keys(this.filterRooms()).map(
                       roomName => (
                         <RoomLink
                           key={roomName}
